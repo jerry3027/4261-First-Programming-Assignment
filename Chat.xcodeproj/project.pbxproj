@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		C4EC86B827A25A6500981DF0 /* ChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EC86B727A25A6500981DF0 /* ChatApp.swift */; };
-		C4EC86BA27A25A6500981DF0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EC86B927A25A6500981DF0 /* ContentView.swift */; };
+		C4EC86BA27A25A6500981DF0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EC86B927A25A6500981DF0 /* LoginView.swift */; };
 		C4EC86BC27A25A6700981DF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4EC86BB27A25A6700981DF0 /* Assets.xcassets */; };
 		C4EC86BF27A25A6700981DF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4EC86BE27A25A6700981DF0 /* Preview Assets.xcassets */; };
+		C4EC86CB27A25BC700981DF0 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EC86CA27A25BC700981DF0 /* ChatViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C4EC86B427A25A6500981DF0 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4EC86B727A25A6500981DF0 /* ChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApp.swift; sourceTree = "<group>"; };
-		C4EC86B927A25A6500981DF0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C4EC86B927A25A6500981DF0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C4EC86BB27A25A6700981DF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4EC86BE27A25A6700981DF0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C4EC86CA27A25BC700981DF0 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		C4EC86CC27A25CBD00981DF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +54,10 @@
 		C4EC86B627A25A6500981DF0 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				C4EC86CC27A25CBD00981DF0 /* Info.plist */,
 				C4EC86B727A25A6500981DF0 /* ChatApp.swift */,
-				C4EC86B927A25A6500981DF0 /* ContentView.swift */,
+				C4EC86CA27A25BC700981DF0 /* ChatViewModel.swift */,
+				C4EC86B927A25A6500981DF0 /* LoginView.swift */,
 				C4EC86BB27A25A6700981DF0 /* Assets.xcassets */,
 				C4EC86BD27A25A6700981DF0 /* Preview Content */,
 			);
@@ -137,7 +142,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4EC86BA27A25A6500981DF0 /* ContentView.swift in Sources */,
+				C4EC86BA27A25A6500981DF0 /* LoginView.swift in Sources */,
+				C4EC86CB27A25BC700981DF0 /* ChatViewModel.swift in Sources */,
 				C4EC86B827A25A6500981DF0 /* ChatApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,9 +277,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Chat/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Chat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -300,9 +307,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Chat/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Chat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
