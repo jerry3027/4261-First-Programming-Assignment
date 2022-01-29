@@ -123,6 +123,46 @@ class ChatLogViewModel: ObservableObject {
                 return
             }
         }
+        
+        var currentUser: ChatUser?
+        
+        FirebaseManager.shared.fireStore.collection("users").getDocuments { documentsSnapshot, err in
+            if let err = err {
+                self.errorMessage = "Failed to fetch users: \(err)"
+                print("Failed to fetch users: \(err)")
+                return
+            }
+            
+            documentsSnapshot?.documents.forEach({ snapshot in
+                if snapshot.data()["uid"] as! String == uid {
+                    currentUser = .init(data: snapshot.data())
+                }
+            })
+            
+        }
+        
+        
+        let recipientRecentMessageDictionary = [
+            "timestamp": Timestamp(),
+            "text": self.chatText,
+            "fromId": uid,
+            "toId": toId,
+            "profileImageUrl": currentUser?.profileImageUrl ?? "",
+            "email": currentUser?.email ?? ""
+        ] as [String : Any]
+
+        FirebaseManager.shared.fireStore
+            .collection("recent_messages")
+            .document(toId)
+            .collection("messages")
+            .document(uid)
+            .setData(recipientRecentMessageDictionary) { error in
+                if let error = error {
+                    print("Failed to save recipient recent message: \(error)")
+                    return
+                }
+            }
+        
     }
 
     @Published var count = 0
@@ -208,11 +248,6 @@ struct ChatLogView: View {
         }
         .navigationTitle(chatUser?.email ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing: Button(action: {
-            vm.count += 1
-        }, label: {
-            Text("Count: \(vm.count)")
-        }))
     }
         
 }
