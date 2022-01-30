@@ -34,7 +34,6 @@ class MainMessagesViewModel: ObservableObject {
     
     @Published var errorMessage = ""
     @Published var chatUser: ChatUser?
-    @Published var users = [String: ChatUser]()
     
     init() {
         DispatchQueue.main.async {
@@ -44,23 +43,6 @@ class MainMessagesViewModel: ObservableObject {
         
         fetchRecentMessages()
         
-        fetchAllUsers()
-    }
-   
-    private func fetchAllUsers() {
-        FirebaseManager.shared.fireStore.collection("users").getDocuments { documentsSnapshot, err in
-            if let err = err {
-                self.errorMessage = "Failed to fetch users: \(err)"
-                print("Failed to fetch users: \(err)")
-                return
-            }
-
-            documentsSnapshot?.documents.forEach({ snapshot in
-                let user: ChatUser = .init(data: snapshot.data())
-                self.users[user.uid] = user
-            })
-
-        }
     }
     
     @Published var recentMessages = [RecentMessage]()
@@ -210,7 +192,7 @@ struct MainMessagesView: View {
             ForEach(vm.recentMessages) { recentMessage in
                 VStack {
                     NavigationLink {
-                        ChatLogView(chatUser: self.vm.users[recentMessage.toId])
+                        Text("Destination")
                     } label: {
                         HStack(spacing: 16) {
                             WebImage(url: URL(string: recentMessage.profileImageUrl))

@@ -36,12 +36,35 @@ class ChatLogViewModel: ObservableObject {
     @Published var chatMessges = [ChatMessage]()
     
     let chatUser: ChatUser?
+    var currentUser: ChatUser?
     
     init(chatUser: ChatUser?) {
         self.chatUser = chatUser
+        
+        fetchCurrentUser()
+        
         fetchMessages()
     }
     
+    private func fetchCurrentUser() {
+        guard let currentUserId = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        
+        FirebaseManager.shared.fireStore.collection("users").document(currentUserId).getDocument { snapshot, err in
+            if let err = err {
+                self.errorMessage = "Failed to fetch current user: \(err)"
+                print("Failed to fetch current user", err)
+                return
+            }
+            
+            guard let data = snapshot?.data() else {
+                self.errorMessage = "No data found"
+                return
+            }
+                        
+            self.currentUser = .init(data: data)
+        }
+    }
+
     private func fetchMessages() {
         guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else {return}
         guard let toId = chatUser?.uid else {return}
@@ -123,25 +146,7 @@ class ChatLogViewModel: ObservableObject {
                 return
             }
         }
-        
-        var currentUser: ChatUser?
-        
-        FirebaseManager.shared.fireStore.collection("users").getDocuments { documentsSnapshot, err in
-            if let err = err {
-                self.errorMessage = "Failed to fetch users: \(err)"
-                print("Failed to fetch users: \(err)")
-                return
-            }
-            
-            documentsSnapshot?.documents.forEach({ snapshot in
-                if snapshot.data()["uid"] as! String == uid {
-                    currentUser = .init(data: snapshot.data())
-                }
-            })
-            
-        }
-        
-        
+                
         let recipientRecentMessageDictionary = [
             "timestamp": Timestamp(),
             "text": self.chatText,
@@ -150,7 +155,7 @@ class ChatLogViewModel: ObservableObject {
             "profileImageUrl": currentUser?.profileImageUrl ?? "",
             "email": currentUser?.email ?? ""
         ] as [String : Any]
-
+        
         FirebaseManager.shared.fireStore
             .collection("recent_messages")
             .document(toId)
