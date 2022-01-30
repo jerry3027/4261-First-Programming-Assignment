@@ -232,7 +232,7 @@ struct ChatLogView: View {
             .background(Color(.init(white: 0.95, alpha: 1)))
             
             HStack(spacing: 16) {
-                Image(systemName: "photo.on.rectangle")
+                Image(systemName: "photo")
                     .font(.system(size: 24))
                     .foregroundColor(Color(.darkGray))
                 TextField("Description", text: $vm.chatText)
